@@ -9,6 +9,7 @@ public class DiscountCalculations {
 
 	public void calcualteDiscounts() {
 
+		// Calculate price after first discount of 50 percent
 		double firstDiscountedProductPrice = markedProductPrice - (0.50 * markedProductPrice);
 
 		if (promoCode.equals("Promo5")) {
@@ -19,6 +20,7 @@ public class DiscountCalculations {
 			discountPercent = 20;
 		}
 
+		// Calculate discount after applying promo code
 		finalProductPrice = firstDiscountedProductPrice - ((discountPercent * firstDiscountedProductPrice) / 100);
 
 		System.out.println("The final price of the product after applying " + promoCode + " :" + finalProductPrice);
