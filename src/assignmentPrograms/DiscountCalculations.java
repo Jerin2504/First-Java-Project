@@ -20,7 +20,7 @@ public class DiscountCalculations {
 			discountPercent = 20;
 		}
 
-		// Calculate discount after applying promo code
+		// Calculate final price after applying promo code
 		finalProductPrice = firstDiscountedProductPrice - ((discountPercent * firstDiscountedProductPrice) / 100);
 
 		System.out.println("The final price of the product after applying " + promoCode + " :" + finalProductPrice);
