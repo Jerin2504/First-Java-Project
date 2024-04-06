@@ -21,7 +21,8 @@ public class LicenseCheck {
 			} else if (currentLicenceLevel == 2) {
 				System.out.println(
 						"You are eligble for G road test. On successful completion you will be awarded G licence.");
-			}
+			} else
+				System.out.println("Invalid option");
 		}
 	}
 
