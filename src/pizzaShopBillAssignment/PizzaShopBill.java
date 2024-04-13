@@ -15,8 +15,8 @@ public class PizzaShopBill {
 	 */
 
 	String pizzaSize;
-	boolean pepperoniTopping = false;
-	boolean extraCheese = false;
+	boolean addPepperoniTopping = false;
+	boolean addExtraCheese = false;
 	double basePrice;
 	double finalPrice;
 
@@ -35,17 +35,17 @@ public class PizzaShopBill {
 
 			// Receive input for the topping if required
 			System.out.println("Would you like to have pepperoni topping (True/False) ");
-			pepperoniTopping = sc.nextBoolean();
+			addPepperoniTopping = sc.nextBoolean();
 
 			// Receive input for the extra cheese if required
 			System.out.println("Would you like to have extra cheese (True/False) ");
-			extraCheese = sc.nextBoolean();
+			addExtraCheese = sc.nextBoolean();
 
 			basePrice = 15;
-			if (pepperoniTopping) {
+			if (addPepperoniTopping) {
 				finalPrice = basePrice + 2;
 			}
-			if (extraCheese) {
+			if (addExtraCheese) {
 				finalPrice = finalPrice + 1;
 			}
 			break;
@@ -53,17 +53,17 @@ public class PizzaShopBill {
 
 			// Receive input for the topping if required
 			System.out.println("Would you like to have pepperoni topping (True/False) ");
-			pepperoniTopping = sc.nextBoolean();
+			addPepperoniTopping = sc.nextBoolean();
 
 			// Receive input for the extra cheese if required
 			System.out.println("Would you like to have extra cheese (True/False) ");
-			extraCheese = sc.nextBoolean();
+			addExtraCheese = sc.nextBoolean();
 
 			basePrice = 20;
-			if (pepperoniTopping) {
+			if (addPepperoniTopping) {
 				finalPrice = basePrice + 3;
 			}
-			if (extraCheese) {
+			if (addExtraCheese) {
 				finalPrice = finalPrice + 1;
 			}
 			break;
@@ -71,17 +71,17 @@ public class PizzaShopBill {
 
 			// Receive input for the topping if required
 			System.out.println("Would you like to have pepperoni topping (True/False) ");
-			pepperoniTopping = sc.nextBoolean();
+			addPepperoniTopping = sc.nextBoolean();
 
 			// Receive input for the extra cheese if required
 			System.out.println("Would you like to have extra cheese (True/False) ");
-			extraCheese = sc.nextBoolean();
+			addExtraCheese = sc.nextBoolean();
 
 			basePrice = 25;
-			if (pepperoniTopping) {
+			if (addPepperoniTopping) {
 				finalPrice = basePrice + 3;
 			}
-			if (extraCheese) {
+			if (addExtraCheese) {
 				finalPrice = finalPrice + 1;
 			}
 			break;
