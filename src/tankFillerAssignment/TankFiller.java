@@ -9,30 +9,26 @@ public class TankFiller {
 	 * to stop the tank from over flowing.
 	 */
 
-	double tankCapacity = 20;
-	double bucketCapacity;
-	double tankFilled;
+	double tankCapacity = 30;
+	double tankFilled = 5;
 	double tankRemaining;
-	boolean isTankFull = false;
+	boolean requireMoreBuckets = true;
+	boolean useTenLitreBucket = false;
 
 	public void fillTank() {
-
-		if (bucketCapacity <= 10) {
-
-			tankFilled = tankFilled + bucketCapacity;
-			// check the water withdrawn is greater than the quantity of water in tank
-			if (tankFilled < 0) {
-				tankFilled = tankFilled - bucketCapacity;
-				System.out.println("The tank does not have enough water to withdraw");
-			}
+		if ((tankCapacity - tankFilled) >= 10) {
+			tankFilled += 10;
 			tankRemaining = tankCapacity - tankFilled;
 
-			if (tankCapacity == tankFilled) {
-				isTankFull = true;
+			if (tankRemaining == 0) {
+				System.out.println("The tank is full");
+				requireMoreBuckets = false;
+			} else if (tankRemaining < 10) {
+				System.out.println("No more buckets of 10l water required. It requires only " + tankRemaining + " to fill the tank");
+				requireMoreBuckets = false;
 			}
-		} else {
-			System.out.println("The maximum capacity of the bucket is 10l only.");
 		}
+
 	}
 
 }

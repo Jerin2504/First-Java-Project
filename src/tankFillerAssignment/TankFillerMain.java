@@ -9,17 +9,18 @@ public class TankFillerMain {
 		Scanner sc = new Scanner(System.in);
 		TankFiller tf = new TankFiller();
 
+		tf.tankRemaining = tf.tankCapacity - tf.tankRemaining;
+
 		for (int i = 0; i < 100; i++) {
-			System.out.println("Enter the quantiy of water in the bucket");
-			tf.bucketCapacity = sc.nextDouble();
+			System.out.println("Do you like to fill the tank with 10l bucket");
+			tf.useTenLitreBucket = sc.nextBoolean();
 
-			tf.fillTank();
+			if (tf.useTenLitreBucket) {
+				tf.fillTank();
+			}
 
-			if (tf.isTankFull) {
-				System.out.println("The tank is full");
+			if (!tf.requireMoreBuckets) {
 				break;
-			} else {
-				System.out.println("The tank requires " + tf.tankRemaining + "l more to reach full capacity");
 			}
 
 		}
