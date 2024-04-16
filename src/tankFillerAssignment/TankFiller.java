@@ -24,7 +24,7 @@ public class TankFiller {
 				System.out.println("The tank is full");
 				requireMoreBuckets = false;
 			} else if (tankRemaining < 10) {
-				System.out.println("No more buckets of 10l water required. It requires only " + tankRemaining + " to fill the tank");
+				System.out.println("No more buckets of 10l water required. It requires only " + tankRemaining + "l to fill the tank");
 				requireMoreBuckets = false;
 			}
 		}
