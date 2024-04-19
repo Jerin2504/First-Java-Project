@@ -9,8 +9,8 @@ public class TankFiller {
 	 * to stop the tank from over flowing.
 	 */
 
-	double tankCapacity = 30;
-	double tankFilled = 5;
+	double tankCapacity = 35;
+	double tankFilled = 0;
 	double tankRemaining;
 	boolean requireMoreBuckets = true;
 	boolean useTenLitreBucket = false;
