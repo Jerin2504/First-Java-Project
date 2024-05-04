@@ -2,6 +2,11 @@ package stringAssignment;
 
 public class RemoveFirstAndLastChar {
 
+	/*
+	 * Create a function that removes the first and last characters from a string.
+	 * Example : removeFirstLast("hello") ➞ "ell" removeFirstLast("a") ➞ "a"
+	 */
+
 	private String wordEntered;
 
 	public RemoveFirstAndLastChar(String wordEntered) {
