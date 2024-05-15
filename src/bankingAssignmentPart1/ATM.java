@@ -2,11 +2,12 @@ package bankingAssignmentPart1;
 
 public class ATM extends BankOperations {
 
-	public boolean validateAccount(int enteredPin) {
+	public final boolean validateAccount(int enteredPin, Person customer) {
 		if ((customer.getSavedPin()) == enteredPin) {
-			chooseAction();
+			chooseAction(customer);
 			return true;
 		}
 		return false;
 	}
+
 }

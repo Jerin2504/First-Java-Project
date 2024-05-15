@@ -2,6 +2,8 @@ package bankingAssignmentPart3;
 
 import java.util.Scanner;
 
+import bankingAssignmentPart1.Person;
+
 public class ATM extends BankingRules implements BankOperations {
 
 	Person customer;
@@ -10,36 +12,41 @@ public class ATM extends BankingRules implements BankOperations {
 	private int maxNumberOfTransactions;
 	private int dailyWithdrawalLimit;
 	private int totalAmountWithdrawn;
-	private int numberOfTransactions = 0;
-
-	public void chooseAction() {
+	private int numberOfTransactions = BankingConstants.zero;
+	
+	public void chooseAction(Person customer) {
 
 		if (!checkTransactionLimit()) {
 
 			System.out.println("Please select the required action: ");
-			System.out.println("1. Withdraw  |  2. Deposit  |  3. View Balance |  4. Exit ");
+			System.out.println("1. Withdraw  |  2. Deposit  |  3. View Balance |  4. View Last 5 Transactions  | 5. Exit ");
 			int enteredOption = sc.nextInt();
-
+			
 			switch (enteredOption) {
 			case 1:
-				withdrawAmount();
+				withdrawAmount(customer);
 				break;
 
 			case 2:
-				depositAmount();
+				depositAmount(customer);
 				break;
 
 			case 3:
-				viewBalance();
+				viewBalance(customer);
 				break;
 
-			case 4:
+			case 4: 
+				TransactionHistory.displayLastTransactions();
+				chooseAction(customer);
+				break;
+				
+			case 5:
 				System.out.println("Thank You !!!");
 				break;
 
 			default:
 				System.out.println("Please select a valid option..");
-				chooseAction();
+				chooseAction(customer);
 				break;
 			}
 
@@ -51,51 +58,75 @@ public class ATM extends BankingRules implements BankOperations {
 	}
 
 	@Override
-	public void withdrawAmount() {
+	public void withdrawAmount(Person customer) {
 		System.out.println("Please enter the amount you would like to withdraw: ");
 		int withdrawAmount = sc.nextInt();
 
-		if ((withdrawAmount + totalAmountWithdrawn) < dailyWithdrawalLimit) {
-			if (withdrawAmount < customer.getBalance()) {
-				customer.setBalance(customer.getBalance() - withdrawAmount);
-				totalAmountWithdrawn = totalAmountWithdrawn + withdrawAmount;
-				numberOfTransactions++;
-				System.out.println("Your current balance : " + customer.getBalance());
-			} else {
-				System.out.println("Please enter an amount less than your current balance..");
-			}
-		} else {
-			System.out.println("Your daily withdrawal limit is : " + dailyWithdrawalLimit + " . You can withdraw only "
-					+ (dailyWithdrawalLimit - totalAmountWithdrawn) + " today.");
+		if (withdrawAmount <= BankingConstants.zero) {
+			System.out.println("Amount should be greater than zero..");
+			chooseAction(customer);
+			return;
 		}
-		chooseAction();
+
+		if ((customer.getBalance() - withdrawAmount) < BankingConstants.minimumBalance) {
+			System.out.println("Minimum balance of $" + BankingConstants.minimumBalance + " should be maintained");
+			chooseAction(customer);
+			return;
+		}
+
+		if ((withdrawAmount + totalAmountWithdrawn) > dailyWithdrawalLimit) {
+			System.out.println("Your daily withdrawal limit is : " + dailyWithdrawalLimit + " . You can withdraw only $"
+					+ (dailyWithdrawalLimit - totalAmountWithdrawn) + " today.");
+			chooseAction(customer);
+			return;
+		}
+
+		customer.setBalance(customer.getBalance() - withdrawAmount);
+		totalAmountWithdrawn = totalAmountWithdrawn + withdrawAmount;
+		
+		TransactionHistory.transactionType = BankingConstants.withdrawalOperation;
+		TransactionHistory.transactionAmount = withdrawAmount;
+		TransactionHistory.balanceAmount = customer.getBalance();
+		TransactionHistory.storeLastTransactions();
+		
+		numberOfTransactions++;
+		viewBalance(customer);
+		
 	}
 
 	@Override
-	public void depositAmount() {
+	public void depositAmount(Person customer) {
 		System.out.println("Please enter the amount you would like to deposit: ");
 		int depositAmount = sc.nextInt();
 
+		if (depositAmount <= BankingConstants.zero) {
+			System.out.println("Amount should be greater than zero..");
+			chooseAction(customer);
+			return;
+		}
 		customer.setBalance(customer.getBalance() + depositAmount);
-		System.out.println("Your current balance : " + customer.getBalance());
-
+		
+		TransactionHistory.transactionType = BankingConstants.depositOperation;
+		TransactionHistory.transactionAmount = depositAmount;
+		TransactionHistory.balanceAmount = customer.getBalance();
+		TransactionHistory.storeLastTransactions();
+		
 		numberOfTransactions++;
-		chooseAction();
+		viewBalance(customer);
 
 	}
 
 	@Override
-	public void viewBalance() {
+	public void viewBalance(Person customer) {
 
-		System.out.println("Your current balance : " + customer.getBalance());
-
-		numberOfTransactions++;
-		chooseAction();
+		System.out.println("Your current balance : $" + customer.getBalance());
+		chooseAction(customer);
 	}
+	
 
-	public boolean validateAccount(int enteredPin) {
+	public boolean validateAccount(int enteredPin, Person customer) {
 		if ((customer.getSavedPin()) == enteredPin) {
-			chooseAction();
+			chooseAction(customer);
 			return true;
 		}
 		return false;
@@ -103,8 +134,8 @@ public class ATM extends BankingRules implements BankOperations {
 
 	@Override
 	public void bankingLimits() {
-		maxNumberOfTransactions = 3;
-		dailyWithdrawalLimit = 1000;
+		maxNumberOfTransactions = BankingConstants.maxNumberOfTransactions;
+		dailyWithdrawalLimit = BankingConstants.dailyWithdrawalLimit;
 
 	}
 

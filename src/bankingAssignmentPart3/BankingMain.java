@@ -8,6 +8,7 @@ public class BankingMain {
 
 		Scanner sc = new Scanner(System.in);
 
+		System.out.println("Welcome to " + BankingConstants.bankName);
 		System.out.println("Enter the corresponding option to avail the services:  ");
 		System.out.println("1. ATM   |  2. Online Banking");
 
@@ -19,6 +20,5 @@ public class BankingMain {
 		sc.close();
 
 	}
-
 
 }

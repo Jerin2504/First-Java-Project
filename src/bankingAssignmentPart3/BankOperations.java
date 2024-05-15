@@ -1,11 +1,13 @@
 package bankingAssignmentPart3;
 
+import bankingAssignmentPart1.Person;
+
 public interface BankOperations {
 	
-	public void withdrawAmount();
+	public void withdrawAmount(Person customer);
 	
-	public void depositAmount();
+	public void depositAmount(Person customer);
 	
-	public void viewBalance();
+	public void viewBalance(Person customer);
 
 }

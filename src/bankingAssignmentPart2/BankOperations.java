@@ -1,9 +1,9 @@
 package bankingAssignmentPart2;
 
+import bankingAssignmentPart1.Person;
+
 public abstract class BankOperations {
 	
-	Person customer;
-	
-	public abstract void changePinPassword();
+	public abstract void changePinPassword(Person customer);
 
 }
