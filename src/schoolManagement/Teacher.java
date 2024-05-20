@@ -17,7 +17,7 @@ public class Teacher extends Person {
 		this.courses = courses;
 		this.ratings = ratings;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -25,7 +25,7 @@ public class Teacher extends Person {
 	public String getID() {
 		return employeeID;
 	}
-	
+
 	public void addRating(int rating) {
 		ratings.add(rating);
 	}
@@ -34,9 +34,7 @@ public class Teacher extends Person {
 		double sum = 0;
 		for (int eachRating : ratings) {
 			sum += eachRating;
-			
 		}
-
 		return (sum / ratings.size());
 	}
 

@@ -35,7 +35,7 @@ public class School {
 		return student;
 	}
 
-	public int validateTeacher(String enteredName) {
+	public final int validateTeacher(String enteredName) {
 		countSimilarPersons = 0;
 		for (Teacher teacherDetails : teachersList) {
 			if (teacherDetails.getName().equalsIgnoreCase(enteredName)) {
@@ -46,7 +46,7 @@ public class School {
 		return countSimilarPersons;
 	}
 
-	public boolean validateTeacherID(String employeeID) {
+	public final boolean validateTeacherID(String employeeID) {
 		for (Teacher teacherDetails : teachersList) {
 			if (teacherDetails.getID().equals(employeeID)) {
 				teacher = teacherDetails;
@@ -56,7 +56,7 @@ public class School {
 		return false;
 	}
 
-	public int validateStudent(String studentName, int studentAge, String studentGender, double studentPercentage) {
+	public final int validateStudent(String studentName, int studentAge, String studentGender, double studentPercentage) {
 		countSimilarPersons = 0;
 		for (Student studentDetails : studentsList) {
 			if ((studentDetails.getName().equalsIgnoreCase(studentName)) && (studentDetails.getAge() == studentAge)
@@ -69,7 +69,7 @@ public class School {
 		return countSimilarPersons;
 	}
 
-	public boolean validateStudent(String studentID) {
+	public final boolean validateStudent(String studentID) {
 		for (Student studentDetails : studentsList) {
 			if (studentDetails.getStudentID().equals(studentID)) {
 				student = studentDetails;
