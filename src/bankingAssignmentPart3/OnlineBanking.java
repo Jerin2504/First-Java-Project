@@ -6,6 +6,7 @@ import bankingAssignmentPart1.Person;
 
 public class OnlineBanking extends BankingRules implements BankOperations {
 
+	Transaction transactionDetails = new Transaction();
 	Scanner sc = new Scanner(System.in);
 
 	private int maxNumberOfTransactions;
@@ -83,10 +84,10 @@ public class OnlineBanking extends BankingRules implements BankOperations {
 		customer.setBalance(customer.getBalance() - withdrawAmount);
 		totalAmountWithdrawn = totalAmountWithdrawn + withdrawAmount;
 		
-		TransactionHistory.transactionType = BankingConstants.withdrawalOperation;
-		TransactionHistory.transactionAmount = withdrawAmount;
-		TransactionHistory.balanceAmount = customer.getBalance();
-		TransactionHistory.storeLastTransactions();
+		transactionDetails.setTransactionType(BankingConstants.withdrawalOperation);
+		transactionDetails.setTransactionAmount(withdrawAmount);
+		transactionDetails.setBalanceAmount(customer.getBalance());
+		TransactionHistory.storeLastTransactions(transactionDetails);
 		
 		numberOfTransactions++;
 		viewBalance(customer);
@@ -104,10 +105,10 @@ public class OnlineBanking extends BankingRules implements BankOperations {
 		}
 		customer.setBalance(customer.getBalance() + depositAmount);
 		
-		TransactionHistory.transactionType = BankingConstants.depositOperation;
-		TransactionHistory.transactionAmount = depositAmount;
-		TransactionHistory.balanceAmount = customer.getBalance();
-		TransactionHistory.storeLastTransactions();
+		transactionDetails.setTransactionType(BankingConstants.depositOperation);
+		transactionDetails.setTransactionAmount(depositAmount);
+		transactionDetails.setBalanceAmount(customer.getBalance());
+		TransactionHistory.storeLastTransactions(transactionDetails);
 		
 		numberOfTransactions++;
 		viewBalance(customer);

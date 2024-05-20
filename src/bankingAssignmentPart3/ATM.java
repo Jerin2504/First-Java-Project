@@ -6,22 +6,22 @@ import bankingAssignmentPart1.Person;
 
 public class ATM extends BankingRules implements BankOperations {
 
-	Person customer;
 	Scanner sc = new Scanner(System.in);
 
 	private int maxNumberOfTransactions;
 	private int dailyWithdrawalLimit;
 	private int totalAmountWithdrawn;
 	private int numberOfTransactions = BankingConstants.zero;
-	
+
 	public void chooseAction(Person customer) {
 
 		if (!checkTransactionLimit()) {
 
 			System.out.println("Please select the required action: ");
-			System.out.println("1. Withdraw  |  2. Deposit  |  3. View Balance |  4. View Last 5 Transactions  | 5. Exit ");
+			System.out.println(
+					"1. Withdraw  |  2. Deposit  |  3. View Balance |  4. View Transactions History  | 5. Exit ");
 			int enteredOption = sc.nextInt();
-			
+
 			switch (enteredOption) {
 			case 1:
 				withdrawAmount(customer);
@@ -35,11 +35,11 @@ public class ATM extends BankingRules implements BankOperations {
 				viewBalance(customer);
 				break;
 
-			case 4: 
+			case 4:
 				TransactionHistory.displayLastTransactions();
 				chooseAction(customer);
 				break;
-				
+
 			case 5:
 				System.out.println("Thank You !!!");
 				break;
@@ -83,15 +83,12 @@ public class ATM extends BankingRules implements BankOperations {
 
 		customer.setBalance(customer.getBalance() - withdrawAmount);
 		totalAmountWithdrawn = totalAmountWithdrawn + withdrawAmount;
-		
-		TransactionHistory.transactionType = BankingConstants.withdrawalOperation;
-		TransactionHistory.transactionAmount = withdrawAmount;
-		TransactionHistory.balanceAmount = customer.getBalance();
-		TransactionHistory.storeLastTransactions();
-		
+
+		generateTransactionDetails(BankingConstants.withdrawalOperation, withdrawAmount, customer.getBalance());
+
 		numberOfTransactions++;
 		viewBalance(customer);
-		
+
 	}
 
 	@Override
@@ -105,12 +102,9 @@ public class ATM extends BankingRules implements BankOperations {
 			return;
 		}
 		customer.setBalance(customer.getBalance() + depositAmount);
-		
-		TransactionHistory.transactionType = BankingConstants.depositOperation;
-		TransactionHistory.transactionAmount = depositAmount;
-		TransactionHistory.balanceAmount = customer.getBalance();
-		TransactionHistory.storeLastTransactions();
-		
+
+		generateTransactionDetails(BankingConstants.depositOperation, depositAmount, customer.getBalance());
+
 		numberOfTransactions++;
 		viewBalance(customer);
 
@@ -122,7 +116,16 @@ public class ATM extends BankingRules implements BankOperations {
 		System.out.println("Your current balance : $" + customer.getBalance());
 		chooseAction(customer);
 	}
-	
+
+	public void generateTransactionDetails(String transactionType, double transactionAmount, double balanceAmount) {
+		Transaction transactionDetails = new Transaction();
+
+		transactionDetails.setTransactionType(transactionType);
+		transactionDetails.setTransactionAmount(transactionAmount);
+		transactionDetails.setBalanceAmount(balanceAmount);
+		TransactionHistory.storeLastTransactions(transactionDetails);
+
+	}
 
 	public boolean validateAccount(int enteredPin, Person customer) {
 		if ((customer.getSavedPin()) == enteredPin) {
