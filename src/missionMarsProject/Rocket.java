@@ -1,21 +1,21 @@
 package missionMarsProject;
 
 public class Rocket implements SpaceShip{
-	public static double cargoWeight;
+	public double cargoWeight;
 	
 	@Override
-	public boolean launch(int rocketWeight) {
+	public boolean launch() {
 		return true;
 	}
 
 	@Override
-	public boolean land(int rocketWeight) {
+	public boolean land() {
 		return true;
 	}
 
 	@Override
-	public boolean canCarry(Item item) {
-		if(item.getWeight() <= cargoWeight) {
+	public final boolean canCarry(Item item, double maxCargoWieght) {
+		if(item.getWeight() <= (maxCargoWieght - cargoWeight)) {
 			return true;
 		}
 		return false;
@@ -23,9 +23,9 @@ public class Rocket implements SpaceShip{
 	
 	
 	@Override
-	public void carry(Item item) {
-		if(canCarry(item)) {
-			cargoWeight -= item.getWeight();
+	public final void carry(Item item, double maxCargoWeight) {
+		if(canCarry(item, maxCargoWeight)) {
+			cargoWeight += item.getWeight();
 		}
 		
 	}

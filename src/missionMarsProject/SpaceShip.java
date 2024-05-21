@@ -2,12 +2,12 @@ package missionMarsProject;
 
 public interface SpaceShip {
 	
-	public boolean launch(int cargoWeight);
+	public boolean launch();
 	
-	public boolean land(int cargoWeight);
+	public boolean land();
 	
-	public boolean canCarry(Item item);
+	public boolean canCarry(Item item, double maxCargoWeight);
 	
-	public void carry(Item item);
+	public void carry(Item item, double maxCargoWeight);
 
 }

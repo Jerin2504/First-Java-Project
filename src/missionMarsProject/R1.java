@@ -1,12 +1,19 @@
 package missionMarsProject;
 
+import java.util.Random;
+
 public class R1 extends Rocket {
-	
+
 	private double costOfR1;
 	private double weightOfR1;
-	private static final double maximumWeight = 18;
-	private double randomNumber = 0.5;
-	
+	public final double maximumWeight = 18000;
+
+	public R1(double costOfR1, double weightOfR1) {
+		super();
+		this.costOfR1 = costOfR1;
+		this.weightOfR1 = weightOfR1;
+	}
+
 	public double getCostOfR1() {
 		return costOfR1;
 	}
@@ -24,25 +31,42 @@ public class R1 extends Rocket {
 	}
 
 	@Override
-	public boolean launch(int rocketWeight) {
-		double launchExplosionProbability = (0.05 * (rocketWeight / maximumWeight));
-		if (launchExplosionProbability < randomNumber) {
+	public boolean launch() {
+		double launchExplosionProbability = (RocketConstants.r1LaunchExplosionPercentage * (cargoWeight / calculateMaxCargoWeight()));
+		double threshold = generateRandomNumber() / 1000;
+		System.out.println("Launching R1....");
+		System.out.format("Launch Explosion Probability: " + "%.3f",launchExplosionProbability);
+		System.out.format("   Threshold: " + "%.3f %n",threshold);
+		if (launchExplosionProbability < threshold) {
+			System.out.println("Launch successful!");
 			return true;
 		}
+		System.out.println("Launch failed........");
 		return false;
 	}
 
 	@Override
-	public boolean land(int rocketWeight) {
-		double landingCrashProbability = (0.01 * (rocketWeight / maximumWeight));
-		if (landingCrashProbability < randomNumber) {
+	public boolean land() {
+		double landingCrashProbability = (RocketConstants.r1LandingCrashPercentage * (cargoWeight / calculateMaxCargoWeight()));
+		double threshold = generateRandomNumber() / 1000;
+		System.out.println("Landing R1....");
+		System.out.format("Landing Explosion Probability: " + "%.3f",landingCrashProbability);
+		System.out.format("   Threshold: " + "%.3f %n",threshold);
+		if (landingCrashProbability < threshold) {
+			System.out.println("Landing successful!!!  ....R1 on Mars....");
 			return true;
 		}
+		System.out.println("Landing Failed........");
 		return false;
 	}
-	
-	public void calculateCargoWeight() {
-		Rocket.cargoWeight = maximumWeight - weightOfR1;
+
+	public double calculateMaxCargoWeight() {
+		return (maximumWeight - weightOfR1);
+	}
+
+	public static double generateRandomNumber() {
+		Random randomNumber = new Random();
+		return ((randomNumber.nextInt(90)) + 1);
 	}
 
 }
