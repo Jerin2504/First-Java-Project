@@ -8,6 +8,7 @@ public class ClassMain {
 //		a.metho
 		a.methodA();
 		a.methodC();
+//		a.displayA();
 	}
 
 }

@@ -16,6 +16,9 @@ public class VehicleMain {
 		tw.basePrice = 120000;
 		System.out.println(tw.basePrice);
 		tw.finalPrice();
+		
+		FourWheeler fw = (FourWheeler) bike;
+		fw.showChasisNumber();
 	
 
 	}

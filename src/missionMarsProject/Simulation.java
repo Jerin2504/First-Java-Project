@@ -88,7 +88,7 @@ public class Simulation {
 			costOfRocket += RocketConstants.costOfR1;
 		}
 		System.out.println("-----------------------------------------");
-		System.out.println("Total cost of R1 fleet: " + costOfRocket);
+		System.out.println("Total cost of R1 fleet: $" + costOfRocket);
 		System.out.println("-----------------------------------------");
 
 	}
@@ -103,7 +103,7 @@ public class Simulation {
 			costOfRocket += RocketConstants.costOfR2;
 		}
 		System.out.println("-----------------------------------------");
-		System.out.println("Total cost of R2 fleet: " + costOfRocket);
+		System.out.println("Total cost of R2 fleet: $" + costOfRocket);
 		System.out.println("-----------------------------------------");
 
 	}

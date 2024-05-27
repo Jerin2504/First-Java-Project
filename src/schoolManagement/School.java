@@ -56,19 +56,6 @@ public class School {
 		return false;
 	}
 
-	public final int validateStudent(String studentName, int studentAge, String studentGender, double studentPercentage) {
-		countSimilarPersons = 0;
-		for (Student studentDetails : studentsList) {
-			if ((studentDetails.getName().equalsIgnoreCase(studentName)) && (studentDetails.getAge() == studentAge)
-					&& (studentDetails.getGender().equalsIgnoreCase(studentGender)
-							&& (studentDetails.getPercentage() == studentPercentage))) {
-				student = studentDetails;
-				countSimilarPersons++;
-			}
-		}
-		return countSimilarPersons;
-	}
-
 	public final boolean validateStudent(String studentID) {
 		for (Student studentDetails : studentsList) {
 			if (studentDetails.getStudentID().equals(studentID)) {

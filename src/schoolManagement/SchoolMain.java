@@ -9,8 +9,8 @@ public class SchoolMain {
 	public static void main(String[] args) {
 
 		School school = new School();
-		ArrayList<String> courseList = new ArrayList<String>();
-		ArrayList<Integer> ratingList = new ArrayList<Integer>();
+		ArrayList<String> courseList;
+		ArrayList<Integer> ratingList; 
 
 		// Add students and teachers
 		school.addStudents(new Student("Charlie Brown", 15, "Male", "1123123", 65));
@@ -20,14 +20,25 @@ public class SchoolMain {
 
 		String[] courses = { "Mathematics", "Statistics" };
 		Integer[] ratings = { 4, 5, 3, 4 };
+		courseList = new ArrayList<String>();
+		ratingList = new ArrayList<Integer>();
 		courseList.addAll(Arrays.asList(courses));
 		ratingList.addAll(Arrays.asList(ratings));
 		school.addTeachers(new Teacher("Susan Mary", 40, "Female", "478956", 10000, courseList, ratingList));
 
+		courses = new String[] { "Arts", "Humanities" };
+		ratings = new Integer[] { 1,1,5 };
+		courseList = new ArrayList<String>();
+		ratingList = new ArrayList<Integer>();
+		courseList.addAll(Arrays.asList(courses));
+		ratingList.addAll(Arrays.asList(ratings));
+		school.addTeachers(new Teacher("Jacob Francis", 40, "Male", "11111", 10000, courseList, ratingList));
+
+		
 		courses = new String[] { "Physics", "Chemistry" };
 		ratings = new Integer[] { 2, 2 };
-		courseList.clear();
-		ratingList.clear();
+		courseList = new ArrayList<String>();
+		ratingList = new ArrayList<Integer>();
 		courseList.addAll(Arrays.asList(courses));
 		ratingList.addAll(Arrays.asList(ratings));
 		school.addTeachers(new Teacher("Susan Mary", 35, "Female", "478957", 10000, courseList, ratingList));
@@ -37,67 +48,33 @@ public class SchoolMain {
 
 		Scanner sc = new Scanner(System.in);
 		try {
-			System.out.println("Please enter the student's name: ");
-			String studentName = sc.nextLine();
-			System.out.println("Please enter the student's age: ");
-			int studentAge = sc.nextInt();
-			System.out.println("Please enter the student's gender: ");
-			String studentGender = sc.next();
-			System.out.println("Please enter the student's academic percentage: ");
-			double studentPercentage = sc.nextDouble();
-			sc.nextLine();
+			System.out.println("Please enter the student's ID: ");
 
-			if (school.validateStudent(studentName, studentAge, studentGender, studentPercentage) == 0) {
-				System.out.println("Please check the entered details..");
+			if (!school.validateStudent(sc.nextLine())) {
+				System.out.println(" The student ID entered does not exist. Please enter a valid student ID.");
 				return;
-			}
-
-			if (school.validateStudent(studentName, studentAge, studentGender, studentPercentage) > 1) {
-				System.out.println("Please enter the students ID: ");
-				if (!school.validateStudent(sc.next())) {
-					System.out.println(" The student ID entered does not exist..");
-					return;
-				}
-				sc.nextLine();
 			}
 
 			System.out.println();
 			System.out.println("----Stream Allocation Result------");
 			System.out.println(school.getStudent().toString());
-			System.out.println("Allocated Stream: " + school.getStudent().determineStream());
+			System.out.println("Allocated Stream: " + school.getStudent().getStream());
 			System.out.println(school.getStudent().getName() + " can enroll in subjects like "
-					+ school.getStudent().getStreamMessage(school.getStudent().determineStream()));
+					+ school.getStudent().getStreamMessage(school.getStudent().getStream()));
 
 			System.out.println();
-			System.out.println("Enter the name of the teacher you wish to rate:");
-			String teacherName = sc.nextLine();
 
-			if (school.validateTeacher(teacherName) == 0) {
-				System.out.println("Please check the teacher's name as no such teacher exists in the system..");
-				return;
-			}
-
-			if (school.validateTeacher(teacherName) > 1) {
-				System.out.println("Please enter the Teacher's ID: ");
-				if (!school.validateTeacherID(sc.next())) {
-					System.out.println(" The Teacher's ID entered does not exist..");
-					return;
-				}
-				sc.nextLine();
-			}
-
-			System.out.println("Enter the rating for " + school.getTeacher().getName() + "[1-5]");
-			if (school.getStudent().rateTeacher(school.getTeacher(), sc.nextInt())) {
-
+			if(school.getStudent().rateTeacher(sc, school)) {
 				System.out.println();
 				System.out.println("------Updated Teacher Rating-----");
 				System.out.println("Teacher: " + school.getTeacher().getName());
 				System.out.format("New Average Rating: " + "%.1f", school.getTeacher().calculateAverageRating());
 			}
+	
+		} finally
 
-		} finally {
+		{
 			sc.close();
 		}
 	}
-
 }

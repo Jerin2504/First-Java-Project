@@ -48,7 +48,7 @@ public class R1 extends Rocket {
 	@Override
 	public boolean land() {
 		double landingCrashProbability = (RocketConstants.r1LandingCrashPercentage * (cargoWeight / calculateMaxCargoWeight()));
-		double threshold = generateRandomNumber() / 1000;
+		double threshold = generateRandomNumber() / 2000;
 		System.out.println("Landing R1....");
 		System.out.format("Landing Explosion Probability: " + "%.3f",landingCrashProbability);
 		System.out.format("   Threshold: " + "%.3f %n",threshold);

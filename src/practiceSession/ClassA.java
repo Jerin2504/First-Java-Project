@@ -9,5 +9,9 @@ public class ClassA {
 	public void methodC() {
 		System.out.println("This is class A's method C");
 	}
+	
+	public void displayA() {
+		System.out.println("Parent class");
+	}
 
 }
